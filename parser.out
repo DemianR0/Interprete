@@ -1,0 +1,162 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> instrucciones
+Rule 1     instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS condicion LLAVE_DER
+Rule 2     condicion -> SENSOR OPERADOR VALOR
+Rule 3     instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS horario LLAVE_DER
+Rule 4     horario -> VALOR SEP VALOR
+
+Terminals, with rules where they appear
+
+ACCION               : 1 3
+DOSPUNTOS            : 1 3
+LLAVE_DER            : 1 3
+LLAVE_IZQ            : 1 3
+OPERADOR             : 2
+PARDER               : 1 3
+PARIZQ               : 1 3
+SENSOR               : 2
+SEP                  : 4
+VALOR                : 2 4 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+condicion            : 1
+horario              : 3
+instrucciones        : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . instrucciones
+    (1) instrucciones -> . LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS condicion LLAVE_DER
+    (3) instrucciones -> . LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS horario LLAVE_DER
+
+    LLAVE_IZQ       shift and go to state 2
+
+    instrucciones                  shift and go to state 1
+
+state 1
+
+    (0) S' -> instrucciones .
+
+
+
+state 2
+
+    (1) instrucciones -> LLAVE_IZQ . ACCION PARIZQ PARDER DOSPUNTOS condicion LLAVE_DER
+    (3) instrucciones -> LLAVE_IZQ . ACCION PARIZQ PARDER DOSPUNTOS horario LLAVE_DER
+
+    ACCION          shift and go to state 3
+
+
+state 3
+
+    (1) instrucciones -> LLAVE_IZQ ACCION . PARIZQ PARDER DOSPUNTOS condicion LLAVE_DER
+    (3) instrucciones -> LLAVE_IZQ ACCION . PARIZQ PARDER DOSPUNTOS horario LLAVE_DER
+
+    PARIZQ          shift and go to state 4
+
+
+state 4
+
+    (1) instrucciones -> LLAVE_IZQ ACCION PARIZQ . PARDER DOSPUNTOS condicion LLAVE_DER
+    (3) instrucciones -> LLAVE_IZQ ACCION PARIZQ . PARDER DOSPUNTOS horario LLAVE_DER
+
+    PARDER          shift and go to state 5
+
+
+state 5
+
+    (1) instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER . DOSPUNTOS condicion LLAVE_DER
+    (3) instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER . DOSPUNTOS horario LLAVE_DER
+
+    DOSPUNTOS       shift and go to state 6
+
+
+state 6
+
+    (1) instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS . condicion LLAVE_DER
+    (3) instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS . horario LLAVE_DER
+    (2) condicion -> . SENSOR OPERADOR VALOR
+    (4) horario -> . VALOR SEP VALOR
+
+    SENSOR          shift and go to state 9
+    VALOR           shift and go to state 10
+
+    condicion                      shift and go to state 7
+    horario                        shift and go to state 8
+
+state 7
+
+    (1) instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS condicion . LLAVE_DER
+
+    LLAVE_DER       shift and go to state 11
+
+
+state 8
+
+    (3) instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS horario . LLAVE_DER
+
+    LLAVE_DER       shift and go to state 12
+
+
+state 9
+
+    (2) condicion -> SENSOR . OPERADOR VALOR
+
+    OPERADOR        shift and go to state 13
+
+
+state 10
+
+    (4) horario -> VALOR . SEP VALOR
+
+    SEP             shift and go to state 14
+
+
+state 11
+
+    (1) instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS condicion LLAVE_DER .
+
+    $end            reduce using rule 1 (instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS condicion LLAVE_DER .)
+
+
+state 12
+
+    (3) instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS horario LLAVE_DER .
+
+    $end            reduce using rule 3 (instrucciones -> LLAVE_IZQ ACCION PARIZQ PARDER DOSPUNTOS horario LLAVE_DER .)
+
+
+state 13
+
+    (2) condicion -> SENSOR OPERADOR . VALOR
+
+    VALOR           shift and go to state 15
+
+
+state 14
+
+    (4) horario -> VALOR SEP . VALOR
+
+    VALOR           shift and go to state 16
+
+
+state 15
+
+    (2) condicion -> SENSOR OPERADOR VALOR .
+
+    LLAVE_DER       reduce using rule 2 (condicion -> SENSOR OPERADOR VALOR .)
+
+
+state 16
+
+    (4) horario -> VALOR SEP VALOR .
+
+    LLAVE_DER       reduce using rule 4 (horario -> VALOR SEP VALOR .)
+
